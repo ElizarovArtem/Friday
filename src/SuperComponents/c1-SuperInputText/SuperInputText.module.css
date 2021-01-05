@@ -1,0 +1,24 @@
+.superInput {
+    border: none;
+    background-color: skyblue;
+    color: azure;
+    padding: 10px;
+    outline: 0;
+    outline-offset: 0;
+    border-radius: 10px;
+    font-size: 1em;
+}
+
+.errorInput {
+    border: 3px solid dimgray;
+    background-color: crimson;
+    color: black;
+    padding: 10px;
+    outline: 0;
+    outline-offset: 0;
+    border-radius: 10px;
+}
+
+.error {
+    color: red;
+}

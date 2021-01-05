@@ -1,0 +1,16 @@
+.default {
+    background: skyblue;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+    outline: 0;
+    margin-right: 10px;
+}
+
+.red {
+    background: red;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+    outline: 0;
+}
