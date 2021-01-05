@@ -14,6 +14,7 @@ function App() {
         <div className="App">
             <HashRouter>
                 <Switch>
+                    <Route path={"/"} exact render={() => <Redirect to={"/test"}/>}/>
                     <Route path={'/login'} render={() => <Login/>}/>
                     <Route path={'/registration'} render={() => <Registration/>}/>
                     <Route path={'/profile'} render={() => <Profile/>}/>
