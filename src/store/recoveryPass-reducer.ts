@@ -2,7 +2,7 @@
 
 const InitialState = {}
 
-export const appReducer = (state: InitialStateType = InitialState, action: ActionTypes): InitialStateType => {
+export const recoveryPassReducer = (state: InitialStateType = InitialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
 
         default:

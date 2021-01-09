@@ -2,7 +2,7 @@
 
 const InitialState = {}
 
-export const authReducer = (state: InitialStateType = InitialState, action: ActionTypes): InitialStateType => {
+export const registrationReducer = (state: InitialStateType = InitialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
 
         default:
