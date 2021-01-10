@@ -1,9 +1,10 @@
 import {Dispatch} from "redux";
 import {loginAPI, LoginRequestType} from "../Components/Login/loginAPI";
 
-const InitialState = {
+const InitialState: InitialStateType = {
     isLoggedIn: false,
-    error: ''
+    error: null,
+    isLoading: 'idle'
 }
 
 export const loginReducer = (state: InitialStateType = InitialState, action: ActionTypes): InitialStateType => {
@@ -12,6 +13,8 @@ export const loginReducer = (state: InitialStateType = InitialState, action: Act
             return {...state, isLoggedIn: action.isLoggedIn}
         case "SET-ERROR":
             return {...state, error: action.error}
+        case "SET-IS-LOADING":
+            return {...state, isLoading: action.isLoading}
         default:
             return state
     }
@@ -21,25 +24,37 @@ export const loginReducer = (state: InitialStateType = InitialState, action: Act
 const setIsLoggedInAC = (isLoggedIn: boolean) => {
     return {type: "SET-IS-LOGGED-IN", isLoggedIn} as const
 }
-const setErrorAC = (error: string ) => {
+const setErrorAC = (error: string | null ) => {
     return {type: "SET-ERROR", error} as const
 }
-
+const setIsLoadingAC = (isLoading: IsLoadingValuesType ) => {
+    return {type: "SET-IS-LOADING", isLoading} as const
+}
 
 // thunks
-
 export const loginTC = (data: LoginRequestType) => (dispatch: Dispatch) => {
+    dispatch(setIsLoadingAC("loading"))
     loginAPI.login(data)
         .then(res => {
-            debugger
             dispatch(setIsLoggedInAC(true))
-            dispatch(setErrorAC(''))
+            dispatch(setErrorAC(null))
+            dispatch(setIsLoadingAC("idle"))
         })
         .catch(err => {
-            dispatch(setErrorAC(err.response.data.error))
+            if(err.response) {
+                dispatch(setErrorAC(err.response.data.error))
+            } else {
+                dispatch(setErrorAC("Some error"))
+            }
+            dispatch(setIsLoadingAC("idle"))
         })
 }
 
 // types
-type ActionTypes = ReturnType<typeof setIsLoggedInAC> | ReturnType<typeof setErrorAC>
-type InitialStateType = typeof InitialState
+type ActionTypes = ReturnType<typeof setIsLoggedInAC> | ReturnType<typeof setErrorAC> | ReturnType<typeof setIsLoadingAC>
+type InitialStateType = {
+    isLoggedIn: boolean
+    error: string | null
+    isLoading: IsLoadingValuesType
+}
+export type IsLoadingValuesType = 'loading' | 'idle'

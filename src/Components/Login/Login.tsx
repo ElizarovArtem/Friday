@@ -3,7 +3,7 @@ import s from './Login.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import { Redirect } from "react-router-dom";
-import { loginTC } from "../../store/login-reducer";
+import {IsLoadingValuesType, loginTC} from "../../store/login-reducer";
 
 
 export const Login = () => {
@@ -12,7 +12,8 @@ export const Login = () => {
     let [rememberMe, setRememberMe] = useState(false)
     const dispatch = useDispatch()
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
-    const error = useSelector<AppRootStateType, string>(state => state.login.error)
+    const error = useSelector<AppRootStateType, string | null>(state => state.login.error)
+    const isLoading = useSelector<AppRootStateType, IsLoadingValuesType>(state => state.login.isLoading)
 
     const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.currentTarget.value)
     const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.currentTarget.value)
@@ -29,6 +30,7 @@ export const Login = () => {
     return (
         <div>
             <h1>LOGIN</h1>
+            {isLoading === "loading" ? <div>Loading...</div> : null}
             <div className={s.loginForm}>
                 <label >Email: <input type={"email"} value={email} onChange={onChangeEmail}/></label>
                 <label>Password: <input type="password" value={password} onChange={onChangePassword}/></label>
