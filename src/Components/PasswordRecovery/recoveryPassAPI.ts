@@ -9,12 +9,13 @@ const instance = axios.create({
 
 
 export const recoveryPassAPI = {
+
     sendEmail(email: string) {
-        axios.post('auth/forgot',
+       return instance.post('auth/forgot',
             {
                 email: email,
                 from: "AlexB admin",
                 message: "<div style=\"background-color: lime; padding: 15px\"> password recovery link: <a href=\'http://localhost:3000/#/set-new-password/$token$\'>link</a></div>\`"
-            }).then(res => res.data.info).catch(res => res.error);
+            })
     }
 }

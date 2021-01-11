@@ -1,14 +1,19 @@
 import React from "react";
+import { connect } from "react-redux";
+import { sendRecoveryMess,addUserEmail } from "../../store/recoveryPass-reducer";
+import { AppRootStateType } from "../../store/store";
+import { PasswordRecovery } from "./PasswordRecovery";
 
-export const PasswordRecovery = () => {
-  return (
-    <div>
-      <h1>PasswordRecovery</h1>
-      <div>
-        <label htmlFor="email">Enter your Email</label>
-        <input id="email" type="email" title="Email" />
-        <button>Send</button>
-      </div>
-    </div>
-  );
-};
+
+ const mapStateToProps = (state: AppRootStateType) => ({
+   error: state.recoveryPass.error,
+   email: state.recoveryPass.email,
+   emailSended: state.recoveryPass.emailSended
+ })
+
+
+
+const PasswordRecoveryContainer = connect(mapStateToProps,{sendRecoveryMess, addUserEmail})(PasswordRecovery)
+
+export default PasswordRecoveryContainer
+

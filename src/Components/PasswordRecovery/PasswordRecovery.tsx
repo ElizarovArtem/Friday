@@ -1,13 +1,38 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
+import { Redirect } from "react-router-dom";
 
-export const PasswordRecovery = () => {
+type PasswordRecoveryType = {
+  error: string
+  email: string
+  emailSended: boolean
+  sendRecoveryMess: (email: string) => void
+  addUserEmail: (email: string) => void
+}
+
+
+export const PasswordRecovery: React.FC<PasswordRecoveryType> = ({error, email, emailSended, sendRecoveryMess, addUserEmail}) => {
+  
+  const addEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    e.currentTarget.value &&  addUserEmail(e.currentTarget.value)
+  }
+
+  
+  const sendEmail = () => {
+    sendRecoveryMess(email);
+  }
+  
+  if(emailSended && error) {
+    return <Redirect to={'/pas-enter'}/>
+  }
+
   return (
     <div>
       <h1>PasswordRecovery</h1>
       <div>
+        {error && <p>{error}</p>}
         <label htmlFor="email">Enter your Email</label>
-        <input id="email" type="email" title="Email" />
-        <button>Send</button>
+        <input onChange={addEmail} id="email" type="email" title="Email" />
+        <button onClick = {sendEmail} >Send</button>
       </div>
     </div>
   );
