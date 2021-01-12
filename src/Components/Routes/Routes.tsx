@@ -8,6 +8,7 @@ import {Test} from "../Test/Test";
 import {Error} from "../Error/Error";
 import {Login} from "../Login/Login";
 import PasswordRecoveryContainer from "../PasswordRecovery/PasswordRecoveryContainer";
+import NewPasswordEnterContainer from "../NewPasswordEnter/NewPasswordEnterContainer";
 
 export const ROUTE = {
     LOGIN: '/login',
@@ -28,7 +29,7 @@ export const Routes = () => {
                 <Route path={ROUTE.REGISTRATION} render={() => <Registration/>}/>
                 <Route path={ROUTE.PROFILE} render={() => <Profile/>}/>
                 <Route path={ROUTE.PAS_RECOVERY} render={() => <PasswordRecoveryContainer/>}/>
-                <Route path={ROUTE.PAS_ENTER} render={() => <NewPasswordEnter/>}/>
+                <Route path={ROUTE.PAS_ENTER} render={() => <NewPasswordEnterContainer/>}/>
                 <Route path={ROUTE.TEST} render={() => <Test/>}/>
                 <Route path={ROUTE.ERROR} render={() => <Error/>}/>
                 <Redirect from={'*'} to={ROUTE.ERROR}/>
