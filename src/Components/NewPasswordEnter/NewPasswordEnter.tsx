@@ -1,10 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
+
+interface ParamTypes {
+  token: string
+}
+
+
 export const NewPasswordEnter = () => {
 
-  const param = useParams()
-  console.log(param)
+  let {token} = useParams<ParamTypes>()
+  console.log(token)
   return (
     <div>
       <h1>Please enter new password</h1>

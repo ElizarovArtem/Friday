@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { Redirect } from "react-router-dom";
+import { ROUTE } from "../Routes/Routes";
 import style from "./PasswordRecovery.module.css"
 
 type PasswordRecoveryType = {
@@ -22,8 +23,8 @@ export const PasswordRecovery: React.FC<PasswordRecoveryType> = ({error, email, 
     sendRecoveryMess(email);
   }
   
-  if(emailSended && error) {
-    return <Redirect to={'/pas-enter'}/>
+  if(!emailSended && error) {
+    return <Redirect to={'/pas-enter/error'}/>
   }
 
   return (
