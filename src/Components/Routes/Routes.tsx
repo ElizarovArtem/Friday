@@ -15,7 +15,7 @@ export const ROUTE = {
     REGISTRATION: '/registration',
     PROFILE: '/profile',
     PAS_RECOVERY: '/pas-recovery',
-    PAS_ENTER: '/pas-enter',
+    PAS_ENTER: '/pas-enter/:token',
     ERROR: '/404'
 }
 

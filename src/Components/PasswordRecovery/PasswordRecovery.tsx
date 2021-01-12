@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { Redirect } from "react-router-dom";
+import style from "./PasswordRecovery.module.css"
 
 type PasswordRecoveryType = {
   error: string
@@ -28,11 +29,11 @@ export const PasswordRecovery: React.FC<PasswordRecoveryType> = ({error, email, 
   return (
     <div>
       <h1>PasswordRecovery</h1>
-      <div>
-        {error && <p>{error}</p>}
+      <div className = {style.container}>
+        {error && <p className = {style.error}>{error}</p>}
         <label htmlFor="email">Enter your Email</label>
         <input onChange={addEmail} id="email" type="email" title="Email" />
-        <button onClick = {sendEmail} >Send</button>
+        <button className = {style.button} onClick = {sendEmail} >Send</button>
       </div>
     </div>
   );
