@@ -10,6 +10,7 @@ export const Login = () => {
     let [email, setEmail] = useState('')
     let [password, setPassword] = useState('')
     let [rememberMe, setRememberMe] = useState(false)
+    let [validateError, setValidateError] = useState<string | null>(null)
     const dispatch = useDispatch()
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const error = useSelector<AppRootStateType, string | null>(state => state.login.error)
@@ -20,7 +21,16 @@ export const Login = () => {
     const onChangeRememberMe = (e: ChangeEvent<HTMLInputElement>) => setRememberMe(e.currentTarget.checked)
 
     const onClickLogin = () => {
+        if(email === "" || password === "") {
+            setValidateError("Email or password required")
+            return
+        }
         dispatch(loginTC({email, password, rememberMe}))
+    }
+    const onKeyPress = () => {
+        if(validateError != null) {
+            setValidateError(null)
+        }
     }
 
     if(isLoggedIn) {
@@ -32,12 +42,13 @@ export const Login = () => {
             <h1>LOGIN</h1>
             {isLoading === "loading" ? <div>Loading...</div> : null}
             <div className={s.loginForm}>
-                <label >Email: <input type={"email"} value={email} onChange={onChangeEmail}/></label>
-                <label>Password: <input type="password" value={password} onChange={onChangePassword}/></label>
+                <label >Email: <input type={"email"} value={email} onKeyPress={onKeyPress} onChange={onChangeEmail}/></label>
+                <label>Password: <input type="password" value={password} onKeyPress={onKeyPress} onChange={onChangePassword}/></label>
                 <label>Remember me: <input type="checkbox" checked={rememberMe} onChange={onChangeRememberMe}/></label>
-                <button onClick={onClickLogin}>Log IN</button>
+                <button disabled={isLoading === "loading" ? true : false} onClick={onClickLogin}>Log IN</button>
             </div>
             {error ? <div>{error}</div> : null}
+            {validateError ? <div>{validateError}</div> : null}
         </div>
     )
 }

@@ -49,6 +49,38 @@ export const loginTC = (data: LoginRequestType) => (dispatch: Dispatch) => {
             dispatch(setIsLoadingAC("idle"))
         })
 }
+export const authMeTC = () => (dispatch: Dispatch) => {
+    dispatch(setIsLoadingAC("loading"))
+    loginAPI.me()
+        .then(res => {
+            dispatch(setIsLoggedInAC(true))
+            dispatch(setIsLoadingAC("idle"))
+        })
+        .catch(err => {
+            if(err.response) {
+                dispatch(setErrorAC(err.response.data.error))
+            } else {
+                dispatch(setErrorAC("Some error"))
+            }
+            dispatch(setIsLoadingAC("idle"))
+        })
+}
+export const logoutTC = () => (dispatch: Dispatch) => {
+    dispatch(setIsLoadingAC("loading"))
+    loginAPI.me()
+        .then(res => {
+            dispatch(setIsLoggedInAC(false))
+            dispatch(setIsLoadingAC("idle"))
+        })
+        .catch(err => {
+            if(err.response) {
+                dispatch(setErrorAC(err.response.data.error))
+            } else {
+                dispatch(setErrorAC("Some error"))
+            }
+            dispatch(setIsLoadingAC("idle"))
+        })
+}
 
 // types
 type ActionTypes = ReturnType<typeof setIsLoggedInAC> | ReturnType<typeof setErrorAC> | ReturnType<typeof setIsLoadingAC>
