@@ -1,5 +1,5 @@
 import React from "react";
-import {HashRouter, Redirect, Route, Switch} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 import {Registration} from "../Registration/Registration";
 import {Profile} from "../Profile/Profile";
 import {PasswordRecovery} from "../PasswordRecovery/PasswordRecovery";
