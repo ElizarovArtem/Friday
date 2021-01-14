@@ -23,7 +23,7 @@ export const PasswordRecovery: React.FC<PasswordRecoveryType> = ({error, email, 
     sendRecoveryMess(email);
   }
   
-  if(!emailSended && error) {
+  if(emailSended && !error) {
     return <Redirect to={'/pas-enter/error'}/>
   }
 
