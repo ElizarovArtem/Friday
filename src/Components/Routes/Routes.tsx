@@ -1,14 +1,12 @@
 import React from "react";
-import {Redirect, Route, Switch} from "react-router-dom";
+import {HashRouter, Redirect, Route, Switch} from "react-router-dom";
 import {Registration} from "../Registration/Registration";
 import {Profile} from "../Profile/Profile";
-import {PasswordRecovery} from "../PasswordRecovery/PasswordRecovery";
-import {NewPasswordEnter} from "../NewPasswordEnter/NewPasswordEnter";
 import {Test} from "../Test/Test";
 import {Error} from "../Error/Error";
 import {Login} from "../Login/Login";
-import {useSelector} from "react-redux";
-import {AppRootStateType} from "../../store/store";
+import PasswordRecoveryContainer from "../PasswordRecovery/PasswordRecoveryContainer";
+import NewPasswordEnterContainer from "../NewPasswordEnter/NewPasswordEnterContainer";
 
 export const ROUTE = {
     LOGIN: '/login',
@@ -16,12 +14,11 @@ export const ROUTE = {
     REGISTRATION: '/registration',
     PROFILE: '/profile',
     PAS_RECOVERY: '/pas-recovery',
-    PAS_ENTER: '/pas-enter',
+    PAS_ENTER: '/pas-enter/:token',
     ERROR: '/404'
 }
 
 export const Routes = () => {
-
     return (
         <div>
             <HashRouter>
@@ -30,8 +27,8 @@ export const Routes = () => {
                     <Route path={ROUTE.LOGIN} render={() => <Login/>}/>
                     <Route path={ROUTE.REGISTRATION} render={() => <Registration/>}/>
                     <Route path={ROUTE.PROFILE} render={() => <Profile/>}/>
-                    <Route path={ROUTE.PAS_RECOVERY} render={() => <PasswordRecovery/>}/>
-                    <Route path={ROUTE.PAS_ENTER} render={() => <NewPasswordEnter/>}/>
+                    <Route path={ROUTE.PAS_RECOVERY} render={() => <PasswordRecoveryContainer/>}/>
+                    <Route path={ROUTE.PAS_ENTER} render={() => <NewPasswordEnterContainer/>}/>
                     <Route path={ROUTE.TEST} render={() => <Test/>}/>
                     <Route path={ROUTE.ERROR} render={() => <Error/>}/>
                     <Redirect from={'*'} to={ROUTE.ERROR}/>
