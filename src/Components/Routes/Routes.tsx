@@ -7,6 +7,8 @@ import {NewPasswordEnter} from "../NewPasswordEnter/NewPasswordEnter";
 import {Test} from "../Test/Test";
 import {Error} from "../Error/Error";
 import {Login} from "../Login/Login";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../store/store";
 
 export const ROUTE = {
     LOGIN: '/login',
@@ -19,19 +21,22 @@ export const ROUTE = {
 }
 
 export const Routes = () => {
+
     return (
         <div>
-            <Switch>
-                <Route path={"/"} exact render={() => <Redirect to={ROUTE.TEST}/>}/>
-                <Route path={ROUTE.LOGIN} render={() => <Login/>}/>
-                <Route path={ROUTE.REGISTRATION} render={() => <Registration/>}/>
-                <Route path={ROUTE.PROFILE} render={() => <Profile/>}/>
-                <Route path={ROUTE.PAS_RECOVERY} render={() => <PasswordRecovery/>}/>
-                <Route path={ROUTE.PAS_ENTER} render={() => <NewPasswordEnter/>}/>
-                <Route path={ROUTE.TEST} render={() => <Test/>}/>
-                <Route path={ROUTE.ERROR} render={() => <Error/>}/>
-                <Redirect from={'*'} to={ROUTE.ERROR}/>
-            </Switch>
+            <HashRouter>
+                <Switch>
+                    <Route path={"/"} exact render={() => <Redirect to={ROUTE.TEST}/>}/>
+                    <Route path={ROUTE.LOGIN} render={() => <Login/>}/>
+                    <Route path={ROUTE.REGISTRATION} render={() => <Registration/>}/>
+                    <Route path={ROUTE.PROFILE} render={() => <Profile/>}/>
+                    <Route path={ROUTE.PAS_RECOVERY} render={() => <PasswordRecovery/>}/>
+                    <Route path={ROUTE.PAS_ENTER} render={() => <NewPasswordEnter/>}/>
+                    <Route path={ROUTE.TEST} render={() => <Test/>}/>
+                    <Route path={ROUTE.ERROR} render={() => <Error/>}/>
+                    <Redirect from={'*'} to={ROUTE.ERROR}/>
+                </Switch>
+            </HashRouter>
         </div>
     )
 }
