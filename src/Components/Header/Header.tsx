@@ -13,6 +13,8 @@ export const Header = () => {
                 <li><NavLink className={s.link} to={ROUTE.PROFILE}>PROFILE</NavLink></li>
                 <li><NavLink className={s.link} to={ROUTE.PAS_RECOVERY}>FORGOT</NavLink></li>
                 <li><NavLink className={s.link} to={ROUTE.TEST}>TEST</NavLink></li>
+                <li><NavLink className={s.link} to={ROUTE.PACKS}>PACKS</NavLink></li>
+                <li><NavLink className={s.link} to={ROUTE.CARDS}>CARDS</NavLink></li>
             </ul>
         </div>
     )

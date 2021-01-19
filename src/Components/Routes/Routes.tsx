@@ -7,6 +7,8 @@ import {Error} from "../Error/Error";
 import {Login} from "../Login/Login";
 import PasswordRecoveryContainer from "../PasswordRecovery/PasswordRecoveryContainer";
 import NewPasswordEnterContainer from "../NewPasswordEnter/NewPasswordEnterContainer";
+import {Packs} from "../Packs/Packs";
+import {Cards} from "../Cards/Cards";
 
 export const ROUTE = {
     LOGIN: '/login',
@@ -15,7 +17,9 @@ export const ROUTE = {
     PROFILE: '/profile',
     PAS_RECOVERY: '/pas-recovery',
     PAS_ENTER: '/pas-enter/:token',
-    ERROR: '/404'
+    ERROR: '/404',
+    PACKS: '/packs',
+    CARDS: '/cards'
 }
 
 export const Routes = () => {
@@ -31,6 +35,8 @@ export const Routes = () => {
                     <Route path={ROUTE.PAS_ENTER} render={() => <NewPasswordEnterContainer/>}/>
                     <Route path={ROUTE.TEST} render={() => <Test/>}/>
                     <Route path={ROUTE.ERROR} render={() => <Error/>}/>
+                    <Route path={ROUTE.PACKS} render={() => <Packs/>}/>
+                    <Route path={ROUTE.CARDS} render={() => <Cards/>}/>
                     <Redirect from={'*'} to={ROUTE.ERROR}/>
                 </Switch>
             </HashRouter>
