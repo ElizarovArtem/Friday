@@ -25,7 +25,15 @@ export const Login = () => {
             setValidateError("Email or password required")
             return
         }
-        dispatch(loginTC({email, password, rememberMe}))
+        const EmailReg = /\S+@\S+\.\S+/;
+        if(EmailReg.test(email) && password.length > 2){
+            dispatch(loginTC({email, password, rememberMe}))
+        } else if(!EmailReg.test(email)){
+            setValidateError("Email is not valid")
+        } else if(!(password.length > 2)){
+            setValidateError("Password length must be more than 2 symbols")
+        }
+        
     }
     const onKeyPress = () => {
         if(validateError != null) {
