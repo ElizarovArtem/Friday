@@ -19,7 +19,7 @@ export const ROUTE = {
     PAS_ENTER: '/pas-enter/:token',
     ERROR: '/404',
     PACKS: '/packs',
-    CARDS: '/cards'
+    CARDS: '/cards/:id'
 }
 
 export const Routes = () => {

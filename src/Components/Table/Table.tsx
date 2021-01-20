@@ -1,45 +1,37 @@
 import React from "react";
 import s from './Table.module.css'
-import SuperButton from "../../SuperComponents/c2-SuperButton/SuperButton";
-import {PackType} from "../Packs/packs-api";
-import {useDispatch} from "react-redux";
-import {createPackTC, deletePackTC, updatePackTC} from "../../store/packs-reducer";
+import {CardType, PackType} from "../Packs/packs-api";
 import {TableItem} from "./TableItem/TableItem";
+import {TableHeader} from "./TableHeader/TableHeader";
 
 
 type TablePropsType = {
-    packs: Array<PackType>
+    packs?: Array<PackType>
+    cards?: Array<CardType>
+    fieldNames: string[]
+    createItem: () => void
+    deleteItem: (id: string) => void
+    updateItem: (id: string) => void
 }
 export const Table = (props: TablePropsType) => {
-    const dispatch = useDispatch()
-
-    const deletePack = (id: string) => {
-        dispatch(deletePackTC(id))
-    }
-    const updatePack = (id: string) => {
-        dispatch(updatePackTC(id, 'UPDATED fkn UPDATED'))
-    }
 
     return (
         <div className={s.table}>
-            <div className={`${s.tableItem} ${s.tableHeader}`}>
-                <div>Name</div>
-                <div>cardsCount</div>
-                <div>updated</div>
-                <div>
-                    Add pack: <SuperButton onClick={() => dispatch(createPackTC("NEW fkn PACK"))}>Add</SuperButton>
-                </div>
-            </div>
+            <TableHeader fieldNames={props.fieldNames} createItem={props.createItem}/>
             <div>
-                {props.packs.map(p => <TableItem
-                    updatePack={updatePack}
+                {props.packs && props.packs.map(p => <TableItem
                     key={p._id}
-                    id={p._id}
-                    deletePack={deletePack}
-                    name={p.name}
-                    cardsCount={p.cardsCount}
-                    updatedData={p.updated}
+                    updateItem={props.updateItem}
+                    deleteItem={props.deleteItem}
+                    packItem={p}
                 />)}
+                {props.cards && props.cards.map(p => <TableItem
+                    key={p._id}
+                    updateItem={props.updateItem}
+                    deleteItem={props.deleteItem}
+                    cardItem={p}
+                />)}
+
             </div>
         </div>
     )
