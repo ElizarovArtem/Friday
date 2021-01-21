@@ -12,32 +12,32 @@ type TableItemPropsType = {
 }
 export const TableItem = ({packItem, cardItem, ...props}: TableItemPropsType) => {
 
-    if(packItem) {
-        return (
-            <div className={s.tableItem}>
-                <div>{packItem.name}</div>
-                <div>{packItem.cardsCount}</div>
-                <div>{packItem.updated}</div>
-                <div className={s.buttonsDiv}>
-                    <SuperButton onClick={() => props.deleteItem(packItem._id)}>Delete</SuperButton>
-                    <SuperButton onClick={() => props.updateItem(packItem._id)}>Update</SuperButton>
-                    <NavLink to={`/cards/${packItem._id}`}>Cards</NavLink>
+    return (
+        <div>
+            {packItem ?
+                <div className={s.tableItem}>
+                    <div>{packItem.name}</div>
+                    <div>{packItem.cardsCount}</div>
+                    <div>{packItem.updated}</div>
+                    <div className={s.buttonsDiv}>
+                        <SuperButton onClick={() => props.deleteItem(packItem._id)}>Delete</SuperButton>
+                        <SuperButton onClick={() => props.updateItem(packItem._id)}>Update</SuperButton>
+                        <NavLink to={`/cards/${packItem._id}`}>Cards</NavLink>
+                    </div>
                 </div>
-            </div>
-        )
-    } else {
-        return (
-            <div className={s.tableItem}>
-                <div>{cardItem && cardItem.question}</div>
-                <div>{cardItem && cardItem.answer}</div>
-                <div>{cardItem && cardItem.grade}</div>
-                <div>{cardItem && cardItem.updated}</div>
-                <div className={s.buttonsDiv}>
-                    <SuperButton
-                        onClick={() => props.deleteItem(cardItem ? cardItem._id : '')}>Delete</SuperButton>
-                    <SuperButton onClick={() => props.updateItem(cardItem ? cardItem._id : '')}>Update</SuperButton>
+            :
+                <div className={s.tableItem}>
+                    <div>{cardItem && cardItem.question}</div>
+                    <div>{cardItem && cardItem.answer}</div>
+                    <div>{cardItem && cardItem.grade}</div>
+                    <div>{cardItem && cardItem.updated}</div>
+                    <div className={s.buttonsDiv}>
+                        <SuperButton
+                            onClick={() => props.deleteItem(cardItem ? cardItem._id : '')}>Delete</SuperButton>
+                        <SuperButton onClick={() => props.updateItem(cardItem ? cardItem._id : '')}>Update</SuperButton>
+                    </div>
                 </div>
-            </div>
-        )
-    }
+            }
+        </div>
+    )
 }

@@ -169,7 +169,11 @@ export const updateCardTC = (id: string, question: string, packId: string) => (d
 }
 
 // types
-type ActionTypes = ReturnType<typeof setCardsAC> | ReturnType<typeof setPacksAC> | ReturnType<typeof setErrorAC> | ReturnType<typeof setIsLoadingAC>
+type ActionTypes =
+    | ReturnType<typeof setCardsAC>
+    | ReturnType<typeof setPacksAC>
+    | ReturnType<typeof setErrorAC>
+    | ReturnType<typeof setIsLoadingAC>
 type InitialStateType = {
     isLoading: IsLoadingValuesType
     error: string | null

@@ -31,7 +31,6 @@ export const Table = (props: TablePropsType) => {
                     deleteItem={props.deleteItem}
                     cardItem={p}
                 />)}
-
             </div>
         </div>
     )
