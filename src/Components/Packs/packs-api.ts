@@ -7,8 +7,9 @@ export const axiosInstance = axios.create({
 })
 
 export const packsAPI = {
-    getPacks(pageCount: number = 500, page: number = 1) {
-        return axiosInstance.get<GetPacksResponseType>(`cards/pack?pageCount=${pageCount}&page=${page}`)
+    getPacks(packName: string, min: number, max: number, pageCount: number = 15, page: number = 1) {
+        return axiosInstance
+            .get<GetPacksResponseType>(`cards/pack?pageCount=${pageCount}&page=${page}&packName=${packName}&min=${min}&max=${max}`)
     },
     createPack(title: string) {
         return axiosInstance.post(`cards/pack`, {cardsPack: {name: title}})

@@ -5,6 +5,8 @@ import {AppRootStateType} from "../../store/store";
 import {PackType} from "./packs-api";
 import {createPackTC, deletePackTC, getPacksTC, updatePackTC} from "../../store/packs-reducer";
 import {IsLoadingValuesType} from "../../store/login-reducer";
+import {Search} from "../Search/Search";
+import {Pagination} from "../Pagination/Pagination";
 
 
 export const Packs = () => {
@@ -14,7 +16,7 @@ export const Packs = () => {
 
     useEffect(() => {
         dispatch(getPacksTC())
-    },[dispatch])
+    }, [dispatch])
 
     const createPack = () => dispatch(createPackTC("NEW fkn PACK"))
     const deletePack = (id: string) => dispatch(deletePackTC(id))
@@ -27,7 +29,8 @@ export const Packs = () => {
             {isLoading === "loading" ?
                 <div style={{position: "absolute", left: "48%", top: "100px"}}>Loading...</div>
                 :
-                null }
+                null}
+                <Search/>
             <Table
                 deleteItem={deletePack}
                 updateItem={updatePack}
@@ -35,6 +38,7 @@ export const Packs = () => {
                 packs={packs}
                 fieldNames={["Name", "CardsCount", "Updated", "Add pack"]}
             />
+            <Pagination/>
         </div>
     )
 }
