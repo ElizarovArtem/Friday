@@ -22,7 +22,6 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
 
     return (
         <>
-            DoubleRange
 
             <div style={{width: "300px", margin: "0 auto"}}>
                 <Slider
