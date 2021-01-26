@@ -7,6 +7,8 @@ import {createPackTC, deletePackTC, getPacksTC, updatePackTC} from "../../store/
 import {IsLoadingValuesType} from "../../store/login-reducer";
 import {Search} from "../Search/Search";
 import {Pagination} from "../Pagination/Pagination";
+import {TableItem} from "../Table/TableItem/TableItem";
+import {NavLink} from "react-router-dom";
 
 
 export const Packs = () => {
@@ -30,14 +32,24 @@ export const Packs = () => {
                 <div style={{position: "absolute", left: "48%", top: "100px"}}>Loading...</div>
                 :
                 null}
-                <Search/>
+            <Search/>
             <Table
-                deleteItem={deletePack}
-                updateItem={updatePack}
                 createItem={createPack}
                 packs={packs}
                 fieldNames={["Name", "CardsCount", "Updated", "Add pack"]}
-            />
+            >
+                {packs && packs.map(p => <TableItem
+                    key={p._id}
+                    updateItem={updatePack}
+                    deleteItem={deletePack}
+                    packItem={p}
+                    children1={<>
+                        <div>{p.name}</div>
+                        <div>{p.cardsCount}</div>
+                    </>}
+                    children2={<NavLink to={`/cards/${p._id}`}>Cards</NavLink>}
+                />)}
+            </Table>
             <Pagination/>
         </div>
     )

@@ -5,7 +5,8 @@ import {AppRootStateType} from "../../store/store";
 import {CardType} from "../Packs/packs-api";
 import {IsLoadingValuesType} from "../../store/login-reducer";
 import {createCardTC, deleteCardTC, getCardsTC, updateCardTC} from "../../store/packs-reducer";
-import { useParams } from "react-router-dom";
+import {NavLink, useParams} from "react-router-dom";
+import {TableItem} from "../Table/TableItem/TableItem";
 
 type ParamType = {
     id: string
@@ -38,12 +39,20 @@ export const Cards = () => {
                 :
                 null }
             <Table
-                updateItem={updateCard}
-                deleteItem={deleteCard}
                 createItem={createCard}
                 cards={cards}
                 fieldNames={["Question", "Answer", "Grade", "Add item", "Updated"]}
-            />
+            >
+                {cards && cards.map(p => <TableItem
+                    key={p._id}
+                    updateItem={updateCard}
+                    deleteItem={deleteCard}
+                    cardItem={p}
+                    children1={<><div>{p && p.question}</div>
+                        <div>{p && p.answer}</div>
+                        <div>{p && p.grade}</div></>}
+                />)}
+            </Table>
         </div>
     )
 }

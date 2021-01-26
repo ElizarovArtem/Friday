@@ -13,7 +13,7 @@ export const Pagination = () => {
     const currentPage = useSelector<AppRootStateType, number>(state => state.packs.currentPage)
     const totalPacksCount = useSelector<AppRootStateType, number>(state => state.packs.totalPacksCount)
     const pageTotalCount = Math.ceil(totalPacksCount / countItems)
-    debugger
+
 
     const setPackOnPageNumber = (e: ChangeEvent<HTMLSelectElement>) => {
         dispatch(setPacksOnPageAC(Number(e.currentTarget.value)))
