@@ -1,16 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import s from './Table.module.css'
 import {CardType, PackType} from "../Packs/packs-api";
-import {TableItem} from "./TableItem/TableItem";
 import {TableHeader} from "./TableHeader/TableHeader";
-import {NavLink} from "react-router-dom";
 
 
 type TablePropsType = {
     packs?: Array<PackType>
     cards?: Array<CardType>
     fieldNames: string[]
-    createItem: () => void
+    createItem: (title: string, answer?: string) => void
 }
 export const Table: React.FC<TablePropsType> = (props) => {
 

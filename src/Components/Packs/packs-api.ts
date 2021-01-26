@@ -30,8 +30,8 @@ export const packsAPI = {
     deleteCard(id: string) {
         return axiosInstance.delete(`cards/card?id=${id}`)
     },
-    updateCard(id: string, question: string) {
-        return axiosInstance.put(`cards/card`, {card: {_id: id, question}})
+    updateCard(id: string, question: string, answer?: string) {
+        return axiosInstance.put(`cards/card`, {card: {_id: id, question, answer}})
     },
 }
 

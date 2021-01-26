@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {Table} from "../Table/Table";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
@@ -16,13 +16,14 @@ export const Packs = () => {
     const isLoading = useSelector<AppRootStateType, IsLoadingValuesType>(state => state.packs.isLoading)
     const dispatch = useDispatch()
 
+
     useEffect(() => {
         dispatch(getPacksTC())
     }, [dispatch])
 
-    const createPack = () => dispatch(createPackTC("NEW fkn PACK"))
+    const createPack = (title: string) => dispatch(createPackTC(title))
     const deletePack = (id: string) => dispatch(deletePackTC(id))
-    const updatePack = (id: string) => dispatch(updatePackTC(id, 'UPDATED fkn UPDATED'))
+    const updatePack = (id: string, newTitle: string) => dispatch(updatePackTC(id, newTitle))
 
 
     return (

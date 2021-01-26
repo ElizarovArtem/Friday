@@ -188,9 +188,9 @@ export const deleteCardTC = (id: string, packId: string) => (dispatch: Dispatch)
             dispatch(setIsLoadingAC("idle"))
         })
 }
-export const updateCardTC = (id: string, question: string, packId: string) => (dispatch: Dispatch) => {
+export const updateCardTC = (id: string, question: string, packId: string, answer?: string) => (dispatch: Dispatch) => {
     dispatch(setIsLoadingAC("loading"))
-    packsAPI.updateCard(id, question)
+    packsAPI.updateCard(id, question, answer)
         .then(res => {
             dispatch(getCardsTC(packId) as any)
             dispatch(setIsLoadingAC("idle"))

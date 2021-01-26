@@ -21,14 +21,14 @@ export const Cards = () => {
         dispatch(getCardsTC(id))
     },[dispatch])
 
-    const updateCard = (cardId: string) => {
-        dispatch(updateCardTC(cardId, 'More difficult Question', id))
+    const updateCard = (cardId: string, newTitle: string, answer?: string) => {
+        dispatch(updateCardTC(cardId, newTitle, id, answer))
     }
     const deleteCard = (cardId: string) => dispatch(deleteCardTC(cardId, id))
-    const createCard = () => dispatch(createCardTC({
+    const createCard = (question: string, answer?: string) => dispatch(createCardTC({
         cardsPack_id: id,
-        question: "Difficult Question",
-        answer: "Long Answer"
+        question: question,
+        answer: answer ? answer : ""
     }))
 
     return (
