@@ -23,7 +23,7 @@ export const TableItem = ({packItem, cardItem, ...props}: TableItemPropsType) =>
                         <SuperButton onClick={() => props.deleteItem(packItem._id)}>Delete</SuperButton>
                         <SuperButton onClick={() => props.updateItem(packItem._id)}>Update</SuperButton>
                         <NavLink to={`/cards/${packItem._id}`}>Cards</NavLink>
-                        <NavLink to={`/learn`}>Learn</NavLink>
+                        <NavLink to={`/learn/${packItem._id}`}>Learn</NavLink>
                     </div>
                 </div>
             :

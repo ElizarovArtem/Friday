@@ -21,7 +21,7 @@ export const ROUTE = {
     ERROR: '/404',
     PACKS: '/packs',
     CARDS: '/cards/:id',
-    LEARN_PAGE:'/learn',
+    LEARN_PAGE:'/learn/:id',
 }
 
 export const Routes = () => {
