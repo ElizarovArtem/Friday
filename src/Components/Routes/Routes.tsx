@@ -9,6 +9,7 @@ import PasswordRecoveryContainer from "../PasswordRecovery/PasswordRecoveryConta
 import NewPasswordEnterContainer from "../NewPasswordEnter/NewPasswordEnterContainer";
 import {Packs} from "../Packs/Packs";
 import {Cards} from "../Cards/Cards";
+import LearnPage from "../LearnPage/LearnPage";
 
 export const ROUTE = {
     LOGIN: '/login',
@@ -19,7 +20,8 @@ export const ROUTE = {
     PAS_ENTER: '/pas-enter/:token',
     ERROR: '/404',
     PACKS: '/packs',
-    CARDS: '/cards/:id'
+    CARDS: '/cards/:id',
+    LEARN_PAGE:'/learn',
 }
 
 export const Routes = () => {
@@ -37,6 +39,7 @@ export const Routes = () => {
                     <Route path={ROUTE.ERROR} render={() => <Error/>}/>
                     <Route path={ROUTE.PACKS} render={() => <Packs/>}/>
                     <Route path={ROUTE.CARDS} render={() => <Cards/>}/>
+                    <Route path={ROUTE.LEARN_PAGE} render={() => <LearnPage/>}/>
                     <Redirect from={'*'} to={ROUTE.ERROR}/>
                 </Switch>
             </HashRouter>
