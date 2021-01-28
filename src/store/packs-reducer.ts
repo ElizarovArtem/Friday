@@ -36,7 +36,6 @@ export const packsReducer = (state: InitialStateType = InitialState, action: Act
         case "SET-TOTAL-PACKS":
             return {...state, totalPacksCount: action.totalPacks}
         case "SET-SHOW-SUCCESS-MODAL":
-            debugger
             return {...state, showSuccessModal: action.show}
         default:
             return state
@@ -104,7 +103,6 @@ export const createPackTC = (title: string) => (dispatch: Dispatch) => {
         .then(res => {
             dispatch(getPacksTC() as any)
             dispatch(setIsLoadingAC("idle"))
-            debugger
             dispatch(setShowSuccessModalAC(true))
             setTimeout(() => {
                 dispatch(setShowSuccessModalAC(false))
@@ -206,6 +204,25 @@ export const updateCardTC = (id: string, question: string, packId: string, answe
         .then(res => {
             dispatch(getCardsTC(packId) as any)
             dispatch(setIsLoadingAC("idle"))
+        })
+        .catch(err => {
+            if (err.response) {
+                dispatch(setErrorAC(err.response.data.error))
+            } else {
+                dispatch(setErrorAC("Some error"))
+            }
+            dispatch(setIsLoadingAC("idle"))
+        })
+}
+export const updateCardGradeTC = (id: string, grade: number) => (dispatch: Dispatch) => {
+    dispatch(setIsLoadingAC("loading"))
+    packsAPI.updateCardGrade(id, grade)
+        .then(res => {
+            dispatch(setIsLoadingAC("idle"))
+            dispatch(setShowSuccessModalAC(true))
+            setTimeout(() => {
+                dispatch(setShowSuccessModalAC(false))
+            }, 2000)
         })
         .catch(err => {
             if (err.response) {

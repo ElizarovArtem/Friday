@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getCardsTC } from '../../store/packs-reducer';
+import {getCardsTC, updateCardGradeTC} from '../../store/packs-reducer';
 import { AppRootStateType } from '../../store/store';
 import SuperButton from '../../SuperComponents/c2-SuperButton/SuperButton';
 import { packsAPI } from '../Packs/packs-api';
 import style from './LearnPage.module.css'
 import {CardType} from "../Packs/packs-api";
+import {Modal} from "../Modals/Modal";
 
 type ParamType = {
     id: string
@@ -36,11 +37,11 @@ const LearnPage = () => {
     
     const addGrade = (grade: number) => {
         cards[numberCurrentCard].grade = grade;
-        packsAPI.updateCardGrade(cards[numberCurrentCard]._id,grade);
+        dispatch(updateCardGradeTC(cards[numberCurrentCard]._id, grade))
     }
 
     const sortCards = (cardsPack: CardType[]) => {
-        let gradeArr = cards.map((card, index) => {
+        let gradeArr = cardsPack.map((card, index) => {
             return {index, grade: card.grade ,chance: card.grade !==0 ? (5 - card.grade * Math.random()): 4} 
         });
         let currentInd = 0;
@@ -53,7 +54,16 @@ const LearnPage = () => {
         })
        return currentInd
     }
-    console.log('card', cards[numberCurrentCard].grade);
+
+    const show = useSelector<AppRootStateType, boolean>(state => state.packs.showSuccessModal)
+
+    let top: number;
+    if(show) {
+        top = 100
+    }else{
+        top = -100
+    }
+
     return (
         <div className={style.container}>
             <div>
@@ -78,8 +88,12 @@ const LearnPage = () => {
                 <SuperButton className={style.button} onClick={checkNextCard}>След карточка</SuperButton>
                 </div>
             </div>}
-            
-
+            <Modal title={"Success"} width={100} height={50} backgroundDiv={false} bgOnClick={() => {}}
+                   CSSStyles={{
+                       top: top+"px",
+                       backgroundColor: "lightgreen"
+                   }}
+            />
         </div>
     )
 }

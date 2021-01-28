@@ -27,7 +27,7 @@ export const Packs = () => {
     const updatePack = (id: string, newTitle: string) => dispatch(updatePackTC(id, newTitle))
 
     const show = useSelector<AppRootStateType, boolean>(state => state.packs.showSuccessModal)
-    debugger
+
     let top: number;
     if(show) {
         top = 100
@@ -58,7 +58,9 @@ export const Packs = () => {
                         <div>{p.name}</div>
                         <div>{p.cardsCount}</div>
                     </>}
-                    children2={<NavLink to={`/cards/${p._id}`}>Cards</NavLink>}
+                    children2={<>
+                        <NavLink to={"/learn/" + p._id}>Learn</NavLink>
+                        <NavLink to={`/cards/${p._id}`}>Cards</NavLink></>}
                 />)}
             </Table>
             <Pagination/>
