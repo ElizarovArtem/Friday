@@ -9,6 +9,7 @@ import {Search} from "../Search/Search";
 import {Pagination} from "../Pagination/Pagination";
 import {TableItem} from "../Table/TableItem/TableItem";
 import {NavLink} from "react-router-dom";
+import {Modal} from "../Modals/Modal";
 
 
 export const Packs = () => {
@@ -24,6 +25,15 @@ export const Packs = () => {
     const createPack = (title: string) => dispatch(createPackTC(title))
     const deletePack = (id: string) => dispatch(deletePackTC(id))
     const updatePack = (id: string, newTitle: string) => dispatch(updatePackTC(id, newTitle))
+
+    const show = useSelector<AppRootStateType, boolean>(state => state.packs.showSuccessModal)
+    debugger
+    let top: number;
+    if(show) {
+        top = 100
+    }else{
+        top = -100
+    }
 
 
     return (
@@ -52,6 +62,12 @@ export const Packs = () => {
                 />)}
             </Table>
             <Pagination/>
+            <Modal title={"Success"} width={100} height={50} backgroundDiv={false} bgOnClick={() => {}}
+                   CSSStyles={{
+                       top: top+"px",
+                       backgroundColor: "lightgreen"
+                   }}
+            />
         </div>
     )
 }

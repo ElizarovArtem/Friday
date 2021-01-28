@@ -30,7 +30,7 @@ export const TableHeader = ({fieldNames, createItem}: TableHeaderPopsType) => {
                     {fieldNames[3]}: <SuperButton onClick={() => setDisplayModal(true)}>Add</SuperButton>
                 </div>
             </div>
-            {displayModal && <Modal title={"Fill in the fields"} width={500} height={200} backgroundDiv={true}>
+            {displayModal && <Modal bgOnClick={() => setDisplayModal(false)} title={"Fill in the fields"} width={500} height={200} backgroundDiv={true}>
                 <input
                     type="text"
                     value={value}

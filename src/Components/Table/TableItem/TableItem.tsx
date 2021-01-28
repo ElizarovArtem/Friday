@@ -53,13 +53,13 @@ export const TableItem = ({packItem, cardItem, ...props}: TableItemPropsType) =>
                     </div>
                 </div>
             }
-            {displayDeleteModal && <Modal title={"Are you shore"} width={500} height={200} backgroundDiv={true}>
+            {displayDeleteModal && <Modal bgOnClick={() => setDisplayDeleteModal(false)} title={"Are you shore"} width={500} height={200} backgroundDiv={true}>
                 <div style={{display: "flex", justifyContent: "space-around"}}>
                     <SuperButton onClick={deleteItem}>Yes</SuperButton>
                     <SuperButton onClick={() => setDisplayDeleteModal(false)}>No</SuperButton>
                 </div>
             </Modal>}
-            {displayUpdateModal && <Modal title={"Enter updating title"} width={500} height={200} backgroundDiv={true}>
+            {displayUpdateModal && <Modal bgOnClick={() => setDisplayUpdateModal(false)} title={"Enter updating title"} width={500} height={200} backgroundDiv={true}>
                 <input
                     type="text"
                     value={value1}

@@ -13,7 +13,8 @@ const InitialState: InitialStateType = {
     max: 100,
     packsOnPage: 10,
     currentPage: 1,
-    totalPacksCount: 0
+    totalPacksCount: 0,
+    showSuccessModal: false
 }
 
 export const packsReducer = (state: InitialStateType = InitialState, action: ActionTypes): InitialStateType => {
@@ -34,6 +35,9 @@ export const packsReducer = (state: InitialStateType = InitialState, action: Act
             return {...state, currentPage: action.currentPage}
         case "SET-TOTAL-PACKS":
             return {...state, totalPacksCount: action.totalPacks}
+        case "SET-SHOW-SUCCESS-MODAL":
+            debugger
+            return {...state, showSuccessModal: action.show}
         default:
             return state
     }
@@ -63,6 +67,9 @@ export const setCurrentPageAC = (currentPage: number) => {
 }
 const setTotalPacksAC = (totalPacks: number) => {
     return {type: "SET-TOTAL-PACKS", totalPacks} as const
+}
+export const setShowSuccessModalAC = (show: boolean) => {
+    return {type: "SET-SHOW-SUCCESS-MODAL", show} as const
 }
 
 // thunks
@@ -97,6 +104,11 @@ export const createPackTC = (title: string) => (dispatch: Dispatch) => {
         .then(res => {
             dispatch(getPacksTC() as any)
             dispatch(setIsLoadingAC("idle"))
+            debugger
+            dispatch(setShowSuccessModalAC(true))
+            setTimeout(() => {
+                dispatch(setShowSuccessModalAC(false))
+            }, 2000)
         })
         .catch(err => {
             if (err.response) {
@@ -215,6 +227,7 @@ type ActionTypes =
     | ReturnType<typeof setPacksOnPageAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalPacksAC>
+    | ReturnType<typeof setShowSuccessModalAC>
 type InitialStateType = {
     isLoading: IsLoadingValuesType
     error: string | null
@@ -226,5 +239,6 @@ type InitialStateType = {
     packsOnPage: number
     currentPage: number
     totalPacksCount: number
+    showSuccessModal: boolean
 }
 export type IsLoadingValuesType = 'loading' | 'idle'
