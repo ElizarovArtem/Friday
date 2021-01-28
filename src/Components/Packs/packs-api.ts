@@ -33,6 +33,10 @@ export const packsAPI = {
     updateCard(id: string, question: string, answer?: string) {
         return axiosInstance.put(`cards/card`, {card: {_id: id, question, answer}})
     },
+    updateCardGrade(id: string, grade: number) {
+        return axiosInstance.put(`cards/card`, {card: {_id: id, grade}})
+    },
+
 }
 
 export type CreateCardRequestType = {

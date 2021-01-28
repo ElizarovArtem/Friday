@@ -42,7 +42,7 @@ export const TableItem = ({packItem, cardItem, ...props}: TableItemPropsType) =>
                         {props.children2}
                     </div>
                 </div>
-                :
+            :
                 <div className={s.tableItem}>
                     {props.children1}
                     <div>{cardItem && cardItem.updated}</div>
