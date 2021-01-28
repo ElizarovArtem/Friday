@@ -19,8 +19,8 @@ const LearnPage = () => {
     const [numberCurrentCard, setNumberCurrentCard] = useState(0);
     const dispatch = useDispatch();
     const {id} = useParams<ParamType>();
-    
-    
+
+
     useEffect(() => {
         dispatch(getCardsTC(id))
     },[dispatch])
@@ -34,15 +34,14 @@ const LearnPage = () => {
         //numberCurrentCard < cards.length -1 ? setNumberCurrentCard(numberCurrentCard + 1) : setNumberCurrentCard(0);
         setCheckMode(false);
     }
-    
+
     const addGrade = (grade: number) => {
-        cards[numberCurrentCard].grade = grade;
         dispatch(updateCardGradeTC(cards[numberCurrentCard]._id, grade))
     }
 
     const sortCards = (cardsPack: CardType[]) => {
         let gradeArr = cardsPack.map((card, index) => {
-            return {index, grade: card.grade ,chance: card.grade !==0 ? (5 - card.grade * Math.random()): 4} 
+            return {index, grade: card.grade ,chance: card.grade !==0 ? (5 - card.grade * Math.random()): 4}
         });
         let currentInd = 0;
         let maxVal = 0;
@@ -74,7 +73,7 @@ const LearnPage = () => {
                     <SuperButton onClick={checkAnswer} >check answer</SuperButton>
                 </div>
             </div>
-            {checkMode && 
+            {checkMode &&
             <div>
                 <p className={style.text}>{cards[numberCurrentCard] ? cards[numberCurrentCard].answer: 'Have no cards'}</p>
                 <div>

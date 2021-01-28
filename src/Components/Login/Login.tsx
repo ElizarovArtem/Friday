@@ -4,6 +4,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import { Redirect } from "react-router-dom";
 import {IsLoadingValuesType, loginTC} from "../../store/login-reducer";
+import SuperInputText from "../../SuperComponents/c1-SuperInputText/SuperInputText";
+import SuperCheckbox from "../../SuperComponents/c3-SuperCheckbox/SuperCheckbox";
+import SuperButton from "../../SuperComponents/c2-SuperButton/SuperButton";
 
 
 export const Login = () => {
@@ -42,10 +45,10 @@ export const Login = () => {
             <h1>LOGIN</h1>
             {isLoading === "loading" ? <div>Loading...</div> : null}
             <div className={s.loginForm}>
-                <label >Email: <input type={"email"} value={email} onKeyPress={onKeyPress} onChange={onChangeEmail}/></label>
-                <label>Password: <input type="password" value={password} onKeyPress={onKeyPress} onChange={onChangePassword}/></label>
-                <label>Remember me: <input type="checkbox" checked={rememberMe} onChange={onChangeRememberMe}/></label>
-                <button disabled={isLoading === "loading" ? true : false} onClick={onClickLogin}>Log IN</button>
+                <SuperInputText placeholder={"Email"} type={"email"} value={email} onKeyPress={onKeyPress} onChange={onChangeEmail}/>
+                <SuperInputText placeholder={"Password"} type="password" value={password} onKeyPress={onKeyPress} onChange={onChangePassword}/>
+                <SuperCheckbox type="checkbox" checked={rememberMe} onChange={onChangeRememberMe}/>
+                <SuperButton disabled={isLoading === "loading" ? true : false} onClick={onClickLogin}>Log IN</SuperButton>
             </div>
             {error ? <div>{error}</div> : null}
             {validateError ? <div>{validateError}</div> : null}
